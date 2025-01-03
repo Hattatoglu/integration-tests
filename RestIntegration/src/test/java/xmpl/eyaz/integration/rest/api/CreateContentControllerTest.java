@@ -14,7 +14,7 @@ import xmpl.eyaz.integration.rest.test.IT;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.from;
-import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+
 
 @IT
 class CreateContentControllerTest extends AbstractIT {
@@ -44,7 +44,7 @@ class CreateContentControllerTest extends AbstractIT {
     }
 
     @Test
-    void shouldThrowException_whenRequestNotValid() {
+    void shouldReturnBadRequest_whenRequestNotValid() {
         //given
         CreateContentRequest request = new CreateContentRequest();
         request.setUsername("test");

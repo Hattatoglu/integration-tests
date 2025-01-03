@@ -14,6 +14,10 @@ This repository contains various Java projects built using the Spring Framework.
 1. This module is a RESTful service designed using `spring-boot-starter-web`.
 2. Integration tests have been written for both `POST` and `GET` requests handled by the Controllers in this module.
 
+## MySqlJpaIntegration Module Features
+1. This module was developed for MySQL JPA integration tests.
+2. Integration tests related to CRUD operations were written in this module.
+
 ## Getting Started
 
 To get started with this project:

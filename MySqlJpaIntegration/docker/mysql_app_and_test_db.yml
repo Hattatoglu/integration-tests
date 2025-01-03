@@ -1,0 +1,27 @@
+#docker compose -f mysql_app_and_test_db.yml -p integration up -d
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      LANG: C.UTF-8
+    ports:
+      - 3306:3306
+
+  testmysql:
+    image: mysql:8.0
+    volumes:
+      - mysql-test-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      LANG: C.UTF-8
+    ports:
+      - 4306:3306
+
+volumes:
+  mysql-test-data:
+  mysql-data:
