@@ -1,0 +1,39 @@
+server:
+  port: 8503
+
+kafka-producer-config:
+  bootstrap-servers: ${spring.embedded.kafka.brokers}
+  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+  value-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+  compression-type: none
+  acks: 1
+  batch-size: 16384
+  batch-size-boost-factor: 100
+  linger-ms: 5
+  request-timeout-ms: 60000
+  retry-count: 5
+
+kafka-consumer-config:
+  bootstrap-servers: ${spring.embedded.kafka.brokers}
+  key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  error-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+  auto-offset-reset: earliest
+  batch-listener: true
+  auto-startup: true
+  concurrency-level: 3
+  session-timeout-ms: 10000
+  heartbeat-interval-ms: 3000
+  max-poll-interval-ms: 300000
+  max-poll-records: 500
+  max-partition-fetch-bytes-default: 1048576
+  max-partition-fetch-bytes-boost-factor: 1
+  poll-timeout-ms: 150
+
+service-order-publisher:
+  topic:
+    service-order-restaurant-topic-name: service-order-restaurant-test-topic
+
+service-order-consumer:
+  topic:
+    service-order-restaurant-topic-name: service-order-restaurant-test-topic

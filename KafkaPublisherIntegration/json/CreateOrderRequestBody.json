@@ -1,0 +1,7 @@
+{
+  "username" : "test-username",
+  "orderItemId" : "test-orderItemId-12345",
+  "price" : 123.45,
+  "restaurantId" : "test-restaurantId",
+  "address": "test-address"
+}

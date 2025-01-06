@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    ports:
+      - "9091:8080"
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=<<local-machine-ip>>:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=<<local-machine-ip>>:2181
