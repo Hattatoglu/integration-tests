@@ -1,50 +1,44 @@
 package xmpl.eyaz.integration.message.restaurant;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import xmpl.eyaz.integration.message.command.CreateOrderCommand;
-import xmpl.eyaz.integration.message.kafka.config.KafkaTestConsumer;
+import xmpl.eyaz.integration.message.kafka.KafkaTestConsumer;
 import xmpl.eyaz.integration.message.kafka.model.OrderCreatedEvent;
-import xmpl.eyaz.integration.message.restaurant.support.TestSupport;
-
-import java.math.BigDecimal;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.util.UUID;
+import xmpl.eyaz.integration.message.restaurant.support.RestaurantEventPublisherHelperTestSupport;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-class RestaurantEventPublisherHelperIT extends TestSupport {
+class RestaurantEventPublisherHelperIT extends RestaurantEventPublisherHelperTestSupport {
 
+    @Autowired
     private RestaurantEventPublisherHelper restaurantEventPublisherHelper;
+
+    @Autowired
+    private KafkaTestConsumer kafkaTestConsumer;
 
     @BeforeEach
     void setUp() {
-        initiateTestConsumer();
-        this.restaurantEventPublisherHelper = getRestaurantEventPublisherHelper();
+        kafkaTestConsumer.initiateTestConsumer();
     }
 
     @Test
     void should_sendOrderCreatedEvent() {
 
-        CreateOrderCommand command = CreateOrderCommand.builder()
-                .username("test-username")
-                .orderItemId("test-orderItemId-1234")
-                .price(BigDecimal.valueOf(123.45))
-                .restaurantId("test-restaurantId")
-                .address("test-address")
-                .orderStatus("PAID")
-                .build();
+        //given
+        CreateOrderCommand command = getCreateOrderCommand();
 
-        command.setOrderCreationTime(ZonedDateTime.now(ZoneOffset.UTC));
-        command.setTrackingId(UUID.randomUUID().toString());
-
+        //when
         CreateOrderCommand answer = restaurantEventPublisherHelper.publish(command);
 
-        OrderCreatedEvent event = getMessageFromQueue();
+        //then
+        OrderCreatedEvent event = kafkaTestConsumer.getMessageFromQueue();
+
 
         assertThat(answer).isNotNull();
         assertThat(answer.getOrderStatus()).isNotNull().isEqualTo("PENDING");
@@ -61,8 +55,21 @@ class RestaurantEventPublisherHelperIT extends TestSupport {
 
     }
 
+    @Test
+    void should_throwException_whenCommandNotProper() {
+        // given
+        CreateOrderCommand command = getCreateOrderCommandWithNullFields();
+
+        // when
+        Throwable answer = assertThrows(Throwable.class, () -> restaurantEventPublisherHelper.publish(command));
+
+        //then
+        Assertions.assertThat(answer).isNotNull();
+        //Assertions.assertThat(answer.getMessage()).isEqualTo("account.not.found");
+    }
+
     @AfterEach
     void tearDown() {
-        closeConsumer();
+        kafkaTestConsumer.closeConsumer();
     }
 }

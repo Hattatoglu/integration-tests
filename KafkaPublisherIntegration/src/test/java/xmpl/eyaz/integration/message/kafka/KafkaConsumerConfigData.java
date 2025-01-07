@@ -1,4 +1,4 @@
-package xmpl.eyaz.integration.message.kafka.config;
+package xmpl.eyaz.integration.message.kafka;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

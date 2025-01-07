@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import xmpl.eyaz.integration.message.command.CreateOrderCommand;
 import xmpl.eyaz.integration.message.kafka.model.OrderCreatedEvent;
 import xmpl.eyaz.integration.message.kafka.producer.KafkaProducer;
@@ -56,7 +54,7 @@ public class RestaurantEventPublisherHelper implements RestaurantEventPublisher{
                 .build();
     }
 
-    public String getEventBodyPayload(CreateOrderCommand command) {
+    private String getEventBodyPayload(CreateOrderCommand command) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.writeValueAsString(getOrderCreatedEvent(command));

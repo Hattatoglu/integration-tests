@@ -1,4 +1,4 @@
-package xmpl.eyaz.integration.message.kafka.config;
+package xmpl.eyaz.integration.message.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,15 +7,14 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
-import org.springframework.kafka.test.context.EmbeddedKafka;
-import org.springframework.stereotype.Component;
 import xmpl.eyaz.integration.message.kafka.model.OrderCreatedEvent;
-import xmpl.eyaz.integration.message.restaurant.config.IT;
 
 import java.time.Duration;
 import java.util.*;
 
+@Configuration
 public class KafkaTestConsumer {
 
     @Autowired
@@ -24,7 +23,7 @@ public class KafkaTestConsumer {
     @Value("${service-order-consumer.topic.service-order-restaurant-topic-name}")
     private String TOPIC;
 
-    public Consumer<String, String> consumer ;
+    private Consumer<String, String> consumer ;
 
     public void initiateTestConsumer() {
         Map<String, Object> props = new HashMap<>();
