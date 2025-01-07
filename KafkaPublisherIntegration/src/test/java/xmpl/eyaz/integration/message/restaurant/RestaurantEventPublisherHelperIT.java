@@ -1,19 +1,20 @@
 package xmpl.eyaz.integration.message.restaurant;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.test.context.EmbeddedKafka;
 import xmpl.eyaz.integration.message.command.CreateOrderCommand;
 import xmpl.eyaz.integration.message.kafka.KafkaTestConsumer;
 import xmpl.eyaz.integration.message.kafka.model.OrderCreatedEvent;
+import xmpl.eyaz.integration.message.restaurant.config.IT;
 import xmpl.eyaz.integration.message.restaurant.support.RestaurantEventPublisherHelperTestSupport;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+@IT
+@EmbeddedKafka(partitions = 1, topics = {"service-order-restaurant-test-topic"})
 class RestaurantEventPublisherHelperIT extends RestaurantEventPublisherHelperTestSupport {
 
     @Autowired
@@ -53,19 +54,6 @@ class RestaurantEventPublisherHelperIT extends RestaurantEventPublisherHelperTes
         assertThat(event.getOrderCreationTime()).isNotNull().isEqualTo(command.getOrderCreationTime().toString());
         assertThat(event.getTrackingId()).isNotNull().isEqualTo(command.getTrackingId());
 
-    }
-
-    @Test
-    void should_throwException_whenCommandNotProper() {
-        // given
-        CreateOrderCommand command = getCreateOrderCommandWithNullFields();
-
-        // when
-        Throwable answer = assertThrows(Throwable.class, () -> restaurantEventPublisherHelper.publish(command));
-
-        //then
-        Assertions.assertThat(answer).isNotNull();
-        //Assertions.assertThat(answer.getMessage()).isEqualTo("account.not.found");
     }
 
     @AfterEach

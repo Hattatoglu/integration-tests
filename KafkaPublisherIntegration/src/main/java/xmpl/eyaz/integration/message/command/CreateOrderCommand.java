@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
-public class CreateOrderCommand {
+public class CreateOrderCommand implements Command{
 
     private final String username;
     private final String orderItemId;

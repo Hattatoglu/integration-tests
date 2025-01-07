@@ -18,6 +18,10 @@ This repository contains various Java projects built using the Spring Framework.
 1. This module was developed for MySQL JPA integration tests.
 2. Integration tests related to CRUD operations were written in this module.
 
+## KafkaPublisherIntegration Module Features
+1. This module is an example for Kafka message publisher integration tests.
+2. `spring-kafka` and `spring-kafka-test` dependencies is utilized for integration tests.
+
 ## Getting Started
 
 To get started with this project:
