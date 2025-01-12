@@ -6,6 +6,9 @@ public class TestConstant {
     public static final String USERID_TWO = "2d342626-2030-4abe-ac06-0609618dd6e3";
     public static final String USERID_THREE = "94da2021-4c4a-4729-9699-e8f03a9d239e";
 
+    public static final String USERNAME = "test username";
+    public static final String NAME = "test name";
+
     public static final String USERNAME_ONE = "username one";
     public static final String NAME_ONE = "name one";
 

@@ -22,6 +22,10 @@ This repository contains various Java projects built using the Spring Framework.
 1. This module is an example for Kafka message publisher integration tests.
 2. `spring-kafka` and `spring-kafka-test` dependencies is utilized for integration tests.
 
+## RedisIntegration Module Features
+1. Demonstrates message caching for Spring projects using Redis.
+2. Utilizes the `spring-boot-starter-data-redis` dependency.
+
 ## Getting Started
 
 To get started with this project:

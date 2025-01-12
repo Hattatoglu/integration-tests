@@ -12,10 +12,6 @@ public class RedisConfigData {
     private int database;
     private String password;
     private int timeout;
-    private String keySerializer;
-    private String hashKeySerializer;
-    private String valueSerializer;
-    private String hashValueSerializer;
 
     public String getHost() {
         return host;
@@ -57,35 +53,4 @@ public class RedisConfigData {
         this.timeout = timeout;
     }
 
-    public String getKeySerializer() {
-        return keySerializer;
-    }
-
-    public void setKeySerializer(String keySerializer) {
-        this.keySerializer = keySerializer;
-    }
-
-    public String getHashKeySerializer() {
-        return hashKeySerializer;
-    }
-
-    public void setHashKeySerializer(String hashKeySerializer) {
-        this.hashKeySerializer = hashKeySerializer;
-    }
-
-    public String getValueSerializer() {
-        return valueSerializer;
-    }
-
-    public void setValueSerializer(String valueSerializer) {
-        this.valueSerializer = valueSerializer;
-    }
-
-    public String getHashValueSerializer() {
-        return hashValueSerializer;
-    }
-
-    public void setHashValueSerializer(String hashValueSerializer) {
-        this.hashValueSerializer = hashValueSerializer;
-    }
 }

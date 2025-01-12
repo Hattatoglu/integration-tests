@@ -36,7 +36,7 @@ public class RedisCacheTestSupport {
     }
 
     protected CreateUserCommand getCreateUserCommand(String userId) {
-        CreateUserCommand command = new CreateUserCommand("test_username", "test-name-integration");
+        CreateUserCommand command = new CreateUserCommand(TestConstant.USERNAME, TestConstant.NAME);
 
         User user = getUser(TestScenario.SCENARIO_SUCCESS, command.getUsername(), command.getName());
         command.setUser(user);

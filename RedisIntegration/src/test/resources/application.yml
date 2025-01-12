@@ -1,5 +1,5 @@
 app-redis-config:
-  host: 192.168.1.35
+  host: <<your machine ip>>
   port: 4379
   database: 0
   password:

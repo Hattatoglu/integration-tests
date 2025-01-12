@@ -14,7 +14,6 @@ public class CreateUserCommand {
         this.name = name;
     }
 
-
     public String getUsername() {
         return username;
     }
