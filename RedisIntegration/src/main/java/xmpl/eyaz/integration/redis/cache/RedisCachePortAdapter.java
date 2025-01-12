@@ -9,6 +9,8 @@ import xmpl.eyaz.integration.redis.command.FindUserCommand;
 import xmpl.eyaz.integration.redis.model.User;
 import xmpl.eyaz.integration.redis.redis.RedisProcess;
 
+import java.util.Objects;
+
 
 @Component
 public class RedisCachePortAdapter implements RedisCachePort{
@@ -31,7 +33,9 @@ public class RedisCachePortAdapter implements RedisCachePort{
     @Override
     public FindUserCommand find(FindUserCommand command) {
         String value = redisProcess.findByKey(command.getUserId().toString());
-        command.setUser(getUserFromJson(value));
+        if (!Objects.isNull(value)) {
+            command.setUser(getUserFromJson(value));
+        }
         return command;
     }
 

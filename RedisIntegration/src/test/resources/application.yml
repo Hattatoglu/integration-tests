@@ -1,0 +1,6 @@
+app-redis-config:
+  host: 192.168.1.35
+  port: 4379
+  database: 0
+  password:
+  timeout: 5000
